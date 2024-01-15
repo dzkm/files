@@ -21,10 +21,8 @@ compinit
 #custom
 alias neofetch="fastfetch"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
-if ! pgrep -x "ssh-agent" > /dev/null
-then
-	eval "$(ssh-agent -s)"
-fi
+
+eval `keychain --eval github gitlab`
 
 # Load Sheldon
 eval "$(sheldon source)"
