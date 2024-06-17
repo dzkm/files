@@ -21,7 +21,7 @@ zle -N menu-search
 zle -N recent-paths
 zle -N insert-unambiguous-or-complete
 
-eval `keychain --eval github gitlab`
+eval `keychain --eval github-pop.dfms`
 
 # Load Sheldon
 eval "$(sheldon source)"
