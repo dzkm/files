@@ -1,10 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/catppuccin_mocha.omp.json)"
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
@@ -21,11 +15,14 @@ compinit
 #custom
 alias neofetch="fastfetch"
 export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/docker.sock
+export PATH="${PATH:+${PATH}:}$HOME/.local/bin"
+
+zle -N menu-search
+zle -N recent-paths
+zle -N insert-unambiguous-or-complete
 
 eval `keychain --eval github gitlab`
 
 # Load Sheldon
 eval "$(sheldon source)"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
