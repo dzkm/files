@@ -1,0 +1,146 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "palette": {
+        "os": "#ACB0BE",
+        "closer": "p:os",
+        "pink": "#F5C2E7",
+        "lavender": "#B4BEFE",
+        "blue":  "#89B4FA",
+        "mauve": "#CBA6F7",
+        "base": "#1E1E2E",
+        "mantle": "#181825",
+        "crust": "#11111B",
+        "surface0": "#313244",
+        "surface1": "#45475A",
+        "text": "#cdd6f4",
+        "subtext": "#bac2d3"
+  },
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+          {
+              "foreground": "#f9e2af",
+              "background": "p:surface1",
+              "type": "shell",
+              "style": "powerline",
+              "powerline_symbol": "\ue0b0",
+              "leading_powerline_symbol": "\ue0b6",
+              "template": "{{if gt .Code 0}} \uf467 {{.Code}} {{else}} \uf32a {{end}}"
+          },
+        {
+          "foreground": "p:mauve",
+          "background": "p:surface0",
+          "properties": {
+            "folder_icon": "..\ue5fe..",
+            "home_icon": "\udb84\udcb5 ",
+            "style": "powerlevel",
+            "max_width": 50 
+          },
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "template": " {{ .Path }} ",
+          "type": "path"
+        },
+        {
+            "background": "p:mauve",
+          "foreground": "p:surface0",
+          "properties": {
+            "branch_icon": "\ue725 ",
+            "cherry_pick_icon": "\ue29b ",
+            "commit_icon": "\uf417 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": false,
+            "merge_icon": "\ue727 ",
+            "no_commits_icon": "\uf0c3 ",
+            "rebase_icon": "\ue728 ",
+            "revert_icon": "\uf0e2 ",
+            "tag_icon": "\uf412 "
+          },
+          "template": " {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Staging.Changed) (.Working.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "type": "git" 
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+        "type": "prompt",
+        "alignment": "right",
+        "overflow": "hide",
+        "segments": [
+            {
+                "style": "diamond",
+                "trailing_diamond": "\ue0b4",
+                "leading_diamond": "\ue0b6", 
+                "foreground": "#94e2d5",
+                "background": "p:surface0",
+                "template": "\uf007 {{ .UserName }}",
+                "type": "session"
+            },
+            {
+                "foreground": "#ffffff",
+                "background": "transparent",
+                "style": "plain",
+                "type": "text",
+                "template": "\u3000"
+            },
+            {
+                "style": "diamond",
+                "trailing_diamond": "\ue0b4",
+                "leading_diamond": "\ue0b6", 
+                "foreground": "#eba0ac",
+                "background": "p:surface0",
+                "template": "\udb81\udc8b {{ .HostName }}",
+                "type": "session"
+            },
+            {
+                "foreground": "#ffffff",
+                "background": "transparent",
+                "style": "plain",
+                "type": "text",
+                "template": "\u3000"
+            },
+            {
+                "foreground": "p:text",
+                "style": "diamond",
+                "trailing_diamond": "\ue0b4",
+                "leading_diamond": "\ue0b2",
+                "background": "p:surface1",
+                "leading_powerline_symbol": "\u2588",
+                "type": "time",
+                "properties": {
+                    "time_format": "3:04PM"
+                }
+            }
+        ]
+    },
+    {
+        "type": "prompt",
+        "alignment": "left",
+        "newline": true,
+        "overflow": "break",
+        "segments": [
+            {
+                "style": "plain",
+                "foreground": "p:closer",
+                "template": " \udb85\udfa9",
+                "type": "text"
+            }
+        ]
+    }
+  ],
+  "transient_prompt": {
+      "background": "transparent",
+      "foreground": "#ff0000",
+      "template": "\u180E"
+  },
+  "secondary_prompt": {
+      "background": "transparent",
+      "foreground": "#A6ADC8",
+      "template": "\uEA9C"
+  },
+  "final_space": true,
+  "version": 2
+}
