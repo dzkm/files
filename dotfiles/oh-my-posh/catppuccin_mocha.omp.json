@@ -20,13 +20,13 @@
       "alignment": "left",
       "segments": [
           {
-              "foreground": "#f9e2af",
+              "foreground": "p:mauve",
               "background": "p:surface1",
               "type": "shell",
               "style": "powerline",
               "powerline_symbol": "\ue0b0",
               "leading_powerline_symbol": "\ue0b6",
-              "template": "{{if gt .Code 0}} \uf467 {{.Code}} {{else}} \uf32a {{end}}"
+              "template": "{{if gt .Code 0}}\uf467 {{.Code}}{{else}}\udb80\udd1b {{end}}"
           },
         {
           "foreground": "p:mauve",
