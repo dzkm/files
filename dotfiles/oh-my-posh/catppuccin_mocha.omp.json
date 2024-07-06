@@ -43,7 +43,7 @@
           "type": "path"
         },
         {
-            "background": "p:mauve",
+          "background": "p:mauve",
           "foreground": "p:surface0",
           "properties": {
             "branch_icon": "\ue725 ",
@@ -61,6 +61,19 @@
           "style": "powerline",
           "powerline_symbol": "\ue0b0",
           "type": "git" 
+        },
+        {
+          "type": "python",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b0",
+          "background": "p:blue",
+          "foreground": "p:surface0",
+          "template": "\ue606 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}",
+          "properties": {
+            "display_default": true,
+            "display_mode": "context",
+            "folder_name_fallback": true
+          }
         }
       ],
       "type": "prompt"
