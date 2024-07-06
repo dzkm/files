@@ -23,6 +23,8 @@ zle -N insert-unambiguous-or-complete
 
 eval `keychain --eval github-pop.dfms`
 
+bindkey "^[[3~" delete-char
+
 # Load Sheldon
 eval "$(sheldon source)"
 
