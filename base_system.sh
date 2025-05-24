@@ -35,6 +35,7 @@ loadkeys br-abnt2
 timedatectl set-timezone America/Sao_Paulo
 
 #CLEAR DEVICE
+dd if=/dev/zero of="${ROOT_DEVICE}" bs=32M status=progress
 parted -s "$ROOT_DEVICE" mklabel gpt
 
 #EFI
