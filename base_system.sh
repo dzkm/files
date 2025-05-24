@@ -69,5 +69,7 @@ mkdir /mnt/boot
 mount "${PARTED_DEVICE}1" /mnt/boot
 pacstrap /mnt base base-devel vim
 genfstab -U /mnt >>/mnt/etc/fstab
-echo "Check generated fstab to see if there's any repeated entries and if they don't have noatime"
+echo "Base system installed."
+echo "You can copy extra_system.sh to /mnt/root and execute it."
+echo "To execute, just run: arch-chroot /mnt /bin/bash /root/extra_system.sh"
 exit
