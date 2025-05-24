@@ -1,6 +1,6 @@
 #!/bin/sh
 export HOST_NAME
-if [[ -z "${HOST_NAME+x}"]]; then
+if [[ -z "${HOST_NAME+x}" ]]; then
   echo "Set HOST_NAME enviroment variable"
   exit
 fi
@@ -28,6 +28,10 @@ cd cachyos-repo
 ./cachyos-repo.sh
 rm -r /root/cachyos-repo /root/cachyos-repo.tar.xz
 
+# Rate mirrors
+pacman -Sy --noconfirm cachyos-rate-mirrors
+cachyos-rate-mirrors
+
 #Install packages
 pacman -Syyu --noconfirm grub \
   efibootmgr \
@@ -41,7 +45,7 @@ pacman -Syyu --noconfirm grub \
   git \
   bluez \
   blueman \
-  buez-utils \
+  bluez-utils \
   xdg-utils \
   xdg-user-dirs \
   cups \
@@ -56,7 +60,7 @@ pacman -Syyu --noconfirm grub \
   intel-ucode \
   amd-ucode \
   stow
-if [[ GAMING -eq 1]]; then
+if [[ GAMING -eq 1 ]]; then
   pacman -S --noconfirm cachyos-gaming-meta
 fi
 
