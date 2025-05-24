@@ -12,14 +12,14 @@ if [[ -z "${ROOT_DEVICE+x}" ]]; then
 fi
 
 #VARIABLES
-TOTAL_RAM_KB=$(grep "MemTotal" /proc/meminfo | awk {print $2})
+TOTAL_RAM_KB=$(grep "MemTotal" /proc/meminfo | awk '{print $2}')
 TOTAL_RAM_MB=$((TOTAL_RAM_KB / 1024))
 EFI_START="1MiB"
 EFI_END="1025MiB"
 
 SWAP_PERCENTAGE=60
 SWAP_CALCULATED_MB="${TOTAL_RAM_MB}"
-if ( (SWAP_CALCULATED_MB >16384)); then
+if [[ "${SWAP_CALCULATED_MB}" -gt 16384 ]]; then
   SWAP_CALCULATED_MB=$((TOTAL_RAM_MB * SWAP_PERNCETAGE / 100))
 fi
 SWAP_START="${EFI_END}"
@@ -28,7 +28,7 @@ BTRFS_START=${SWAP_END}
 
 #INFO DUMP
 echo "RAM: ${TOTAL_RAM_MB}MiB"
-echo "SWAP: ${SWAP_SIZE_PARTED}MiB"
+echo "SWAP: ${SWAP_CALCULATED_MB}MiB"
 
 #SET LOCALE
 loadkeys br-abnt2
