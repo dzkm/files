@@ -25,9 +25,9 @@ mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvo
 mkdir /mnt/{boot,home,opt,tmp,snapshots,root,srv,var}
 mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@home "${BTRFS_DEVICE}" /mnt/home
 mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@opt "${BTRFS_DEVICE}" /mnt/opt
-mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@tmp "${BTRFS_DEVICE}"/mnt/tmp
-mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@snapshots "${BTRFS_DEVICE}"/mnt/snapshots
-mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@root "${BTRFS_DEVICE}"/mnt/root
-mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@srv "${BTRFS_DEVICE}"/mnt/srv
-mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@var "${BTRFS_DEVICE}"/mnt/var
+mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@tmp "${BTRFS_DEVICE}" /mnt/tmp
+mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@snapshots "${BTRFS_DEVICE}" /mnt/snapshots
+mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@root "${BTRFS_DEVICE}" /mnt/root
+mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@srv "${BTRFS_DEVICE}" /mnt/srv
+mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@var "${BTRFS_DEVICE}" /mnt/var
 mount -t btrfs o subvol=@var "${BTRFS_DEVICE}" /mnt/var
