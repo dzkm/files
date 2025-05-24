@@ -54,7 +54,8 @@ pacman -Syyu --no-confirm grub \
   btrfs-progs \
   paru \
   intel-ucode \
-  amd-ucode
+  amd-ucode \
+  stow
 if [[ GAMING == 1]]; then
   pacman -S --no-confirm cachyos-gaming-meta
 fi;
