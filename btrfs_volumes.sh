@@ -30,4 +30,4 @@ mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvo
 mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@root "${BTRFS_DEVICE}" /mnt/root
 mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@srv "${BTRFS_DEVICE}" /mnt/srv
 mount -t btrfs -o defaults,noatime,compress=zstd,commit=120,space_cache=v2,subvol=@var "${BTRFS_DEVICE}" /mnt/var
-mount -t btrfs o subvol=@var "${BTRFS_DEVICE}" /mnt/var
+mount -t btrfs -o subvol=@var "${BTRFS_DEVICE}" /mnt/var
