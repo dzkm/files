@@ -61,6 +61,7 @@ mkfs.fat -F 32 "${PARTED_DEVICE}1"
 mkswap "${PARTED_DEVICE}2"
 mkfs.btrfs -f "${PARTED_DEVICE}3"
 
+export BTRFS_DEVICE="${PARTED_DEVICE}3"
 sh ./btrfs_volumes.sh
 
 mkdir /mnt/boot
