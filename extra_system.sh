@@ -12,13 +12,28 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 
 #Set locale
-sed 's/#pt_BR.UTF-8/pt_BR.UTF-8/g' /etc/locale.gen
+sed -i 's/#pt_BR.UTF-8/pt_BR.UTF-8/g' /etc/locale.gen
 locale-gen
 echo LANG=pt_BR.UTF-8 >>/etc/locale.conf
 
 #Set HostName
 echo $HOST_NAME >>/etc/hostname
-sed $(s/myhostname/$HOST_NAME/g) /etc/hosts
+sed -i $(s/myhostname/$HOST_NAME/g) /etc/hosts
+
+#Hook limine
+mkdir -p /etc/pacman.d/hooks/
+cat <<EOF
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Type = Package
+Target = limine
+
+[Action]
+Description = Deploying Limine after upgrade...
+When = PostTransaction
+Exec = /usr/bin/cp /usr/share/limine/BOOTX64.EFI boot/efi/EFI/limine/
+EOF>> /etc/pacman.d/hooks/99-limine.hook
 
 # Install CachyOS Kernel and Repo
 cd /root
@@ -33,8 +48,9 @@ pacman -Sy --noconfirm cachyos-rate-mirrors
 cachyos-rate-mirrors
 
 #Install packages
-pacman -Syyu --noconfirm grub \
+pacman -Syyu --noconfirm \
   efibootmgr \
+  mkinitcpio \
   linux-cachyos \
   linux-cachyos-headers \
   linux-firmware \
@@ -54,16 +70,19 @@ pacman -Syyu --noconfirm grub \
   lvm2 \
   foomatic-db-engine \
   foomatic-db \
-  grub-btrfs \
   btrfs-progs \
   paru \
   intel-ucode \
   amd-ucode \
-  stow
+  stow \
+  firewalld \
+  snapper \
+  snap-pac
 if [[ GAMING -eq 1 ]]; then
   pacman -S --noconfirm cachyos-gaming-meta
 fi
 
+mkinitcpio -p linux
 echo "Edit /etc/mkinitcpio.conf to add the modules then run mkinitcpio -P 
 BTRFS – btrfs
 Intel GPU - i915

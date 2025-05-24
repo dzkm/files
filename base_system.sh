@@ -67,8 +67,31 @@ sh ./btrfs_volumes.sh
 
 mkdir /mnt/boot
 mount "${PARTED_DEVICE}1" /mnt/boot
-pacstrap /mnt base base-devel vim
+pacstrap /mnt base base-devel vim limine;
 genfstab -U /mnt >>/mnt/etc/fstab
+
+#Setup limine
+mkdir /boot/efi/EFI/limine;
+mkdir /boot/limine;
+cp /usr/share/limine/BOOTX64.EFI /boot/efi/EFI/limine
+efibootmgr \
+  --create \
+  --disk "${ROOT_DEVICE}" \
+  --part 1 \
+  --label "Arch Linux Limine Bootloader" \
+  --loader '\EFI\limine\BOOTX64.EFI' \
+  --unicode \
+  --verbose
+
+cat <<EOF
+timeout: 5
+/Arch Linux
+  protocol: linux
+  path: boot():/vmlinuz-linux-cachyos
+  cmdline: root=UUID=${blkid "${PARTED_DEVICE}3" -s UUID -o value} rw rootflags=subvol=/@
+  module_path: boot():/initramfs-linux
+EOF>>/boot/limine
+
 echo "Base system installed."
 echo "You can copy extra_system.sh to /mnt/root and execute it."
 echo "To execute, just run: arch-chroot /mnt /bin/bash /root/extra_system.sh"
