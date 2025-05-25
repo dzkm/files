@@ -5,6 +5,15 @@ if [[ -z "${HOST_NAME+x}" ]]; then
   exit
 fi
 
+export GPU
+if [[ -z "${GPU+x}" ]]; then
+  echo "Set GPU environment variable. Supported values: NV or AMD"
+fi
+
+if [[ "$GPU" != "NV" && "$GPU" != "AMD" ]]; then
+  echo "GPU is neither NV nor AMD"
+fi
+
 export GAMING
 
 # Set Localtime
@@ -18,7 +27,7 @@ echo LANG=pt_BR.UTF-8 >>/etc/locale.conf
 
 #Set HostName
 echo $HOST_NAME >>/etc/hostname
-sed -i $(s/myhostname/$HOST_NAME/g) /etc/hosts
+sed -i "s/myhostname/${HOST_NAME}/g" /etc/hosts
 
 #Hook limine
 mkdir -p /etc/pacman.d/hooks/
@@ -77,18 +86,17 @@ pacman -Syyu --noconfirm \
   stow \
   firewalld \
   snapper \
-  snap-pac
+  snap-pac \
+  chwd
 if [[ GAMING -eq 1 ]]; then
   pacman -S --noconfirm cachyos-gaming-meta
 fi
 
-mkinitcpio -p linux
-echo "Edit /etc/mkinitcpio.conf to add the modules then run mkinitcpio -P 
-BTRFS – btrfs
-Intel GPU - i915
-AMD GPU – amdgpu
-NVIDIA Driver – nvidia nvidia_modeset nvidia_uvm nvidia_drm
-Nouveau Driver – nouveau
-EXT4 - ext4
-XFS - xfs"
+mkinitcpio -p linux-cachyos
+mkdir -p /etc/mkinitcpio.conf.d
+echo "MODULES+=(btrfs)" >>/etc/mkinitcpio.conf.d/0-btrfs.conf
+chwd -a
+mkinitcpio -P
+
+echo "Finished installing kernel, firewall and extra packages"
 exit
