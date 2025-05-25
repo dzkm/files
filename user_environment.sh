@@ -1,7 +1,7 @@
 #!/bin/sh
-export NVIDIA;
+export NVIDIA
 
-sudo systemctl enable NetworkManager bluetooth org.cups.cupsd;
+sudo systemctl enable NetworkManager bluetooth org.cups.cupsd
 
 # Install WM
 paru -S --no-confirm hyprland \
@@ -14,16 +14,13 @@ paru -S --no-confirm hyprland \
   libnotify-bin \
   greetd-regreet
 if [[ NVIDIA == 1]]; then
-  echo "options nvidia_drm modeset=1" >> /etc/modprobe.d/nvidia.conf
+  echo "options nvidia_drm modeset=1" >>/etc/modprobe.d/nvidia.conf
 fi
-cat << EOF
+cat <<EOF | tee /etc/greed/hyprland.conf
 exec-once = regreet; hyprctl dispatch exit
 misc {
     disable_hyprland_logo = true
     disable_splash_rendering = true
     disable_hyprland_qtutils_check = true
 }
-EOF >> /etc/greed/hyprland.conf;
-
-
-
+EOF

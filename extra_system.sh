@@ -22,7 +22,7 @@ sed -i $(s/myhostname/$HOST_NAME/g) /etc/hosts
 
 #Hook limine
 mkdir -p /etc/pacman.d/hooks/
-cat <<EOF
+cat <<EOF | tee /etc/pacman.d/hooks/99-limine.hook
 [Trigger]
 Operation = Install
 Operation = Upgrade
@@ -33,7 +33,7 @@ Target = limine
 Description = Deploying Limine after upgrade...
 When = PostTransaction
 Exec = /usr/bin/cp /usr/share/limine/BOOTX64.EFI boot/efi/EFI/limine/
-EOF>> /etc/pacman.d/hooks/99-limine.hook
+EOF
 
 # Install CachyOS Kernel and Repo
 cd /root
