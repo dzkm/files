@@ -68,3 +68,7 @@ wlogout
 wofi
 zen-browser-bin
 zip
+grimblast
+qt5-quickcontrols2
+qt6-declarative
+pkgfile
