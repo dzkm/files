@@ -1,8 +1,8 @@
 #!/bin/sh
 
 if [[ $(whoami) != "root" ]]; then
-  echo "Run as root"
-  exit
+	echo "Run as root"
+	exit
 fi
 
 # Install CachyOS repositories
@@ -74,15 +74,18 @@ flatpak install -y dev.vencord.Vesktop com.github.tchx84.Flatseal org.ferdium.Fe
 systemctl enable --now bluetooth.service firewalld.service power-profiles-daemon.service gnome-keyring-daemon docker
 
 # Start UWSM services
-userMain=$(cat /etc/passwd | grep 1000:1000 | awk -F ":" '{print $1}')
+userMain=$(cat /etc/passwd | grep "1000:1000" | awk -F ":" '{print $1}')
 su - "${userMain}" -c "systemctl --user enable \
   waybar.service \
   hyprlock.service \
 	hypridle.service \
-	hyprpolkitagent.service"
+	hyprpolkitagent.service \
+  hyprpaper.service"
+# Catppuccin theme
+flatpak override --filesystem="/home/$userMain/.local/share/themes" --env=GTK_THEME="catppuccin-mocha-mauve-standard+default"
 
 # Add user to docker and set shell to zsh
-usermod -aG docker --shell /bin/zsh $userMain
+usermod -aG docker --shell /bin/zsh "$userMain"
 
 #TODO: Add stow for dotfiles
 

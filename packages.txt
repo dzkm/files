@@ -72,3 +72,12 @@ grimblast
 qt5-quickcontrols2
 qt6-declarative
 pkgfile
+fisher
+catppuccin-gtk-theme-mauve
+xdg-user-dirs
+flatpak-xdg-utils
+hyprpaper
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
